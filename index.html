@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Encriptador de texto</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Encriptador de texto</h1>
+      <div class="form-group">
+        <label for="original">Texto original:</label>
+        <input type="text" id="original" name="original">
+      </div>
+      <div class="form-group">
+        <button class="cifrar-btn" onclick="encriptar()">
+          Cifrar <i class="fas fa-lock"></i>
+        </button>
+      </div>
+      <div class="form-group">
+        <label for="cifrado">Texto cifrado:</label>
+        <input type="text" id="cifrado" name="cifrado">
+      </div>
+      <div class="form-group">
+        <button class="descifrar-btn" onclick="descifrar()">
+          Descifrar <i class="fas fa-unlock"></i>
+        </button>
+      </div>
+      <div class="form-group">
+        <label for="descifrado">Texto descifrado:</label>
+        <input type="text" id="descifrado" name="descifrado" readonly>
+      </div>
+      <div class="form-group">
+        <button class="copiar-btn" onclick="copiarTexto()">
+          Copiar <i class="fas fa-copy"></i>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function encriptar() {
+        var original = document.getElementById("original").value;
+        var cifrado = window.btoa(original);
+        document.getElementById("cifrado").value = cifrado;
+      }
+
+      function descifrar() {
+        var cifrado = document.getElementById("cifrado").value;
+        if (cifrado) {
+          var original = window.atob(cifrado);
+          document.getElementById("descifrado").value = original;
+        }
+      }
+
+      function copiarTexto() {
+        var textoCifrado = document.getElementById("cifrado").value;
+        if (textoCifrado) {
+          navigator.clipboard.writeText(textoCifrado).then(function() {
+            alert("¡Texto copiado al portapapeles!");
+          }, function() {
+            alert("Error al copiar el texto.");
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
